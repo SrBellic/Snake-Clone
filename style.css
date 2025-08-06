@@ -1,0 +1,55 @@
+body {
+	font-family: sans-serif;
+	background-color: rgb(98, 180, 43);
+	color: white;
+	display: grid;
+	justify-items: center;
+}
+
+canvas {
+	border: solid 4px white;
+	border-radius: 8px;
+}
+
+.game-over-message {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+h2 {
+	font-size: 2.5rem;
+	margin: 0;
+	padding: 4px 10px;
+	border: solid 4px white;
+	border-radius: 8px;
+}
+
+.hidden {
+	display: none;
+}
+
+button {
+	background-color: rgb(98, 180, 43);
+	color: white;
+	padding: 5px 10px;
+	border: none;
+	cursor: pointer;
+	font-size: 1.2rem;
+	transition: background-color 0.275s ease;
+}
+
+button:hover {
+	background-color: white;
+	color: rgb(98, 180, 43);
+}
+
+#stats-message {
+	font-size: 1.5rem;
+	margin: 1rem 0;
+	border: white solid 3px;
+	padding: 0.5rem;
+	border-radius: 8px;
+}
