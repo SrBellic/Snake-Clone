@@ -1,9 +1,15 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-const gameOverText = document.getElementById('game-over');
 
+const gameOverText = document.getElementById('game-over');
 const statsText = document.getElementById('stats-message');
-const buttons = document.querySelectorAll('.buttons button');
+
+const buttonUp = document.getElementById('ArrowUp');
+const buttonDown = document.getElementById('ArrowDown');
+const buttonLeft = document.getElementById('ArrowLeft');
+const buttonRight = document.getElementById('ArrowRight');
+
+const buttonContainer = [buttonUp, buttonDown, buttonLeft, buttonRight];
 
 const PIXEL = {
 	width: 25,
@@ -23,6 +29,16 @@ let axisX = 0; //Coordenates of the snake
 let direction = null;
 let lastDirection = null;
 let gameStatus = true;
+
+// if (document.documentElement.clientWidth <= 768) {
+// 	buttonContainer.forEach((button) => {
+// 		button.classList.add('hidden');
+// 	});
+// } else {
+// 	buttonContainer.forEach((button) => {
+// 		button.classList.remove('hidden');
+// 	});
+// }
 
 document.addEventListener('keydown', (e) => {
 	//restart the game if it is over
@@ -46,6 +62,33 @@ document.addEventListener('keydown', (e) => {
 	if (lastDirection && e.key === opposites[lastDirection]) return;
 
 	direction = e.key;
+});
+
+document.addEventListener('click', (e) => {
+	if (gameStatus === false) {
+		gameOverText.classList.add('hidden');
+		location.reload();
+		gameStatus = true;
+	}
+
+	//Handle button clicks for mobile controls
+
+	const button = e.target.closest('button'); //find the closest button element
+	if (!button) return;
+
+	const allowed = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+	if (!allowed.includes(button.id)) return;
+
+	const opposites = {
+		ArrowUp: 'ArrowDown',
+		ArrowDown: 'ArrowUp',
+		ArrowLeft: 'ArrowRight',
+		ArrowRight: 'ArrowLeft',
+	};
+
+	if (lastDirection && button.id === opposites[lastDirection]) return;
+
+	direction = button.id;
 });
 
 class Snake {
@@ -186,6 +229,15 @@ function updateDirection() {
 }
 
 function draw() {
+	if (document.documentElement.clientWidth <= 768) {
+		buttonContainer.forEach((button) => {
+			button.classList.remove('hidden');
+		});
+	} else {
+		buttonContainer.forEach((button) => {
+			button.classList.add('hidden');
+		});
+	}
 	//Function to draw the snake and fruit on the canvas
 	ctx.save();
 	ctx.clearRect(0, 0, canvas.width, canvas.height);

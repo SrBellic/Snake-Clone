@@ -4,6 +4,7 @@ body {
 	color: white;
 	display: grid;
 	justify-items: center;
+	overflow-x: hidden;
 }
 
 canvas {
@@ -31,19 +32,52 @@ h2 {
 	display: none;
 }
 
-button {
-	background-color: rgb(98, 180, 43);
-	color: white;
-	padding: 5px 10px;
-	border: none;
-	cursor: pointer;
-	font-size: 1.2rem;
-	transition: background-color 0.275s ease;
+.buttons-grid {
+	margin-top: 8px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 17px;
 }
 
-button:hover {
-	background-color: white;
-	color: rgb(98, 180, 43);
+button {
+	background: none;
+	color: white;
+	padding: 12px;
+	border: solid 6px white;
+	border-radius: 8px;
+}
+
+button > span {
+	font-family: monospace;
+	font-size: 2.6rem;
+	font-weight: bold;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+}
+
+#ArrowLeft {
+	grid-row-start: 2;
+}
+
+#ArrowUp {
+	transform: rotate(90deg);
+	grid-column-start: 2;
+}
+
+#ArrowRight {
+	transform: rotate(180deg);
+	grid-column-start: 3;
+	grid-row-start: 2;
+}
+
+#ArrowDown {
+	transform: rotate(-90deg);
+	grid-column-start: 2;
+	grid-row-start: 3;
 }
 
 #stats-message {
@@ -52,4 +86,18 @@ button:hover {
 	border: white solid 3px;
 	padding: 0.5rem;
 	border-radius: 8px;
+}
+
+footer {
+	border-top-right-radius: 5px;
+	color: black;
+	padding: 2.5px 10px;
+	background-color: rgba(255, 255, 255, 0.733);
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+footer > span {
+	font-size: 0.9rem;
 }
