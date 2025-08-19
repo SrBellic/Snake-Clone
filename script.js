@@ -1,9 +1,13 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
-const gameOverText = document.getElementById('game-over');
 
+const gameOverText = document.getElementById('game-over');
 const statsText = document.getElementById('stats-message');
-const buttons = document.querySelectorAll('.buttons button');
+
+const buttonUp = document.getElementById('ArrowUp');
+const buttonDown = document.getElementById('ArrowDown');
+const buttonLeft = document.getElementById('ArrowLeft');
+const buttonRight = document.getElementById('ArrowRight');
 
 const PIXEL = {
 	width: 25,
@@ -46,6 +50,33 @@ document.addEventListener('keydown', (e) => {
 	if (lastDirection && e.key === opposites[lastDirection]) return;
 
 	direction = e.key;
+});
+
+document.addEventListener('click', (e) => {
+	if (gameStatus === false) {
+		gameOverText.classList.add('hidden');
+		location.reload();
+		gameStatus = true;
+	}
+
+	//Handle button clicks for mobile controls
+
+	const button = e.target.closest('button'); //find the closest button element
+	if (!button) return;
+
+	const allowed = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+	if (!allowed.includes(button.id)) return;
+
+	const opposites = {
+		ArrowUp: 'ArrowDown',
+		ArrowDown: 'ArrowUp',
+		ArrowLeft: 'ArrowRight',
+		ArrowRight: 'ArrowLeft',
+	};
+
+	if (lastDirection && button.id === opposites[lastDirection]) return;
+
+	direction = button.id;
 });
 
 class Snake {
