@@ -9,6 +9,8 @@ const buttonDown = document.getElementById('ArrowDown');
 const buttonLeft = document.getElementById('ArrowLeft');
 const buttonRight = document.getElementById('ArrowRight');
 
+const buttonContainer = [buttonUp, buttonDown, buttonLeft, buttonRight];
+
 const PIXEL = {
 	width: 25,
 	height: 25,
@@ -27,6 +29,16 @@ let axisX = 0; //Coordenates of the snake
 let direction = null;
 let lastDirection = null;
 let gameStatus = true;
+
+// if (document.documentElement.clientWidth <= 768) {
+// 	buttonContainer.forEach((button) => {
+// 		button.classList.add('hidden');
+// 	});
+// } else {
+// 	buttonContainer.forEach((button) => {
+// 		button.classList.remove('hidden');
+// 	});
+// }
 
 document.addEventListener('keydown', (e) => {
 	//restart the game if it is over
@@ -217,6 +229,15 @@ function updateDirection() {
 }
 
 function draw() {
+	if (document.documentElement.clientWidth <= 768) {
+		buttonContainer.forEach((button) => {
+			button.classList.remove('hidden');
+		});
+	} else {
+		buttonContainer.forEach((button) => {
+			button.classList.add('hidden');
+		});
+	}
 	//Function to draw the snake and fruit on the canvas
 	ctx.save();
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
